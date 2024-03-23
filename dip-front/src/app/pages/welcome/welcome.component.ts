@@ -6,6 +6,7 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import {NzDividerComponent} from "ng-zorro-antd/divider";
 import {NzListComponent, NzListItemComponent} from "ng-zorro-antd/list";
 import {NzInputDirective} from "ng-zorro-antd/input";
+import {NzButtonComponent} from "ng-zorro-antd/button";
 @Component({
   selector: 'app-welcome',
   standalone: true,
@@ -21,7 +22,8 @@ import {NzInputDirective} from "ng-zorro-antd/input";
     NzRowDirective,
     NzListComponent,
     NzListItemComponent,
-    NzInputDirective
+    NzInputDirective,
+    NzButtonComponent
   ],
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
