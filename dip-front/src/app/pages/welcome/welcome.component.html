@@ -1,6 +1,6 @@
 <div class="header">
   <div class="logo">
-    <img src="assets/logo2.jpg" alt="Logo" style="width: 90px;">
+    <img src="assets/main_logo_W.png" alt="Logo">
   </div>
   <ul class="nav">
     <li>О нас</li>
@@ -9,59 +9,70 @@
     <li>Войти</li>
   </ul>
 <!--  <button class="button">Войти</button>-->
-  <button class="button" style="background-color: #359A81">Зарегистрироваться</button>
+  <button class="button" style="background-color: #359A81" (click)="showModal()">Зарегистрироваться</button>
 </div>
 
 
-<nz-content>
-  <div class="promo-container">
+<div class="promo-container">
     <div class="circle-gradient">
-      <img src="assets/logo2.jpg" class="smartphone-img" style="width: 450px">
+      <img src="assets/banner%20(2).png" class="smartphone-img" style="width: 450px">
     </div>
     <div class="content">
       <h1>Инвестируй вместе с Agile Market Minds!</h1>
-      <p>Здесь, в M&A Analytics, мы предоставляем профессиональные и глубокие аналитические обзоры рынка акций и облигаций. Наша цель – помочь вам сделать обоснованные и эффективные инвестиционные решения.</p>
+      <p>Здесь, в Agile Market Minds, мы предоставляем профессиональные и глубокие
+        аналитические обзоры рынка акций и облигаций.
+        Наша цель – помочь вам сделать обоснованные и эффективные инвестиционные решения.</p>
       <button class="button" style="background-color: #359A81">Попробовать</button>
     </div>
   </div>
-</nz-content>
+
+<div class="subscription-container">
+  <div>
+    <h1>Премиум версия</h1>
+    <p>У нас есть система подписки в котором вы получите доступ к таким расширенным свойствам:</p>
+    <p>1.Отслеживание цен; </p>
+    <p>2.Полная информация о ЦБ;</p>
+    <p>3.Демо-счет;</p>
+  </div>
+  <nz-card nzHoverable class="subscription-card">
+    <div class="title">1 месяц</div>
+    <div class="price">15 000 ₸</div>
+    <button class="button" style="background-color: #359A81">Купить</button>
+  </nz-card>
+</div>
+
+<div class="promo-container">
+  <div class="graf">
+    <img src="assets/graf.png"  style="width: 450px">
+  </div>
+  <div class="content">
+    <h1>Отслеживайте ценные бумаги в реальном времени</h1>
+    <p>У нас вы найдете:</p>
+    <p>• Глубокий анализ и ежедневные рыночные обновления.</p>
+    <p>• Персональные консультации и индивидуальные инвестиционные стратегии.</p>
+    <p>• Непрерывное отслеживание рынка для предоставления самых свежих данных.</p>
+    <p>• Достоверные прогнозы, основанные на продвинутых методах анализа.</p>
+  </div>
+</div>
+
+<div class="subscription">
+  <div class="subscription-title">Будь в курсе о новых возможностях</div>
+  <div class="description">
+    Подпишитесь на рассылку в почту и вы будете получать новости о новых обновлениях нашего приложения.
+  </div>
+  <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
+    <input type="text" nz-input placeholder="Напишите свою почту" />
+  </nz-input-group>
+  <ng-template #suffixButton>
+    <button nz-button nzType="primary"  nzSearch>Подписаться</button>
+  </ng-template>
+</div>
 
 <nz-footer class="footer">
-  <div class="footer-content">
-    <nz-row>
-      <nz-col nzSpan="8">
-        <div class="footer-section">
-          <h4>Разделы</h4>
-          <ul>
-            <li><a href="#">Акции</a></li>
-            <li><a href="#">Облигации</a></li>
-          </ul>
-        </div>
-      </nz-col>
-      <nz-col nzSpan="8">
-        <div class="footer-section">
-          <h4>Веб-сайт</h4>
-          <ul>
-            <li><a href="#">Вход</a></li>
-            <li><a href="#">Вопрос-ответы</a></li>
-          </ul>
-        </div>
-      </nz-col>
-      <nz-col nzSpan="8">
-        <div class="footer-section">
-          <h4>О нас</h4>
-          <ul>
-            <li><a href="#">Связаться с нами</a></li>
-            <li><a href="#">Условия использования</a></li>
-          </ul>
-        </div>
-      </nz-col>
-    </nz-row>
-  </div>
   <nz-divider></nz-divider>
-  <div class="footer-bottom">
+  <div >
     <p>© 2024 Все права защищены.</p>
-    <p>Котировки в режиме реального времени предоставляются Alphavantage.</p>
+    <p>Котировки в режиме реального времени предоста вляются Alphavantage.</p>
   </div>
 </nz-footer>
 

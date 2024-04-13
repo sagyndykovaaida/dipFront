@@ -5,8 +5,12 @@ import {NzColDirective, NzRowDirective} from "ng-zorro-antd/grid";
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import {NzDividerComponent} from "ng-zorro-antd/divider";
 import {NzListComponent, NzListItemComponent} from "ng-zorro-antd/list";
-import {NzInputDirective} from "ng-zorro-antd/input";
+import {NzInputDirective, NzInputGroupComponent} from "ng-zorro-antd/input";
 import {NzButtonComponent} from "ng-zorro-antd/button";
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import {FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 @Component({
   selector: 'app-welcome',
   standalone: true,
@@ -23,15 +27,18 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
     NzListComponent,
     NzListItemComponent,
     NzInputDirective,
-    NzButtonComponent
+    NzButtonComponent,
+    NzCardModule,
+    NzModalModule,
+    NzInputGroupComponent,
+    NzInputModule,
+    ReactiveFormsModule
   ],
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
 export class WelcomeComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
 }

@@ -1,0 +1,89 @@
+<div class="logo">
+  <img src="assets/main_logo_W.png" alt="Logo">
+
+    <h1 style="color: white; padding-top: 10px"> Agile Market Minds</h1>
+
+</div>
+<div class="promo-container">
+  <div class="graf">
+     <img src="assets/graf.png"  style="width: 450px">
+  </div>
+
+  <div class="content">
+
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+     <nz-form-item class="form-area">
+        <nz-form-control [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+          <nz-form-label class="label" [nzXs]="24" nzRequired nzFor="email" style="color: #3b0b0b">Электронная почта</nz-form-label>
+
+          <input nz-input formControlName="email" id="email" placeholder="Введите почту" />
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item class="form-area">
+        <nz-form-control  [nzXs]="24" nzErrorTip="Please input your nickname!">
+          <nz-form-label
+            [nzXs]="24"
+            nzFor="nickname"
+            nzRequired
+            nzTooltipTitle="What do you want other to call you"
+          >
+            <span>Nickname</span>
+          </nz-form-label>
+          <input nz-input id="nickname" formControlName="nickname" placeholder="Введите имя"/>
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item class="form-area">
+        <nz-form-control [nzXs]="24" nzErrorTip="Please input your password!">
+          <nz-form-label  [nzXs]="24" nzFor="password" nzRequired>Пароль</nz-form-label>
+          <input
+            nz-input
+            type="password"
+            id="password"
+            formControlName="password"
+            (ngModelChange)="updateConfirmValidator()"
+            placeholder="Введите пароль"
+          />
+        </nz-form-control>
+      </nz-form-item>
+
+
+      <nz-form-item class="form-area">
+        <nz-form-control  [nzXs]="24" [nzErrorTip]="errorTpl">
+          <nz-form-label [nzXs]="24" nzFor="checkPassword" nzRequired>Повторите пароль</nz-form-label>
+          <input nz-input type="password" formControlName="checkPassword" id="checkPassword" placeholder="Повторите пароль"/>
+          <ng-template #errorTpl let-control>
+            @if (control.errors?.['required']) {
+            Please confirm your password!
+            }
+            @if (control.errors?.['confirm']) {
+            Two passwords that you enter is inconsistent!
+            }
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control  >
+          <label nz-checkbox formControlName="agree">
+            <span>
+              Я согласен с Политикой конфиденциальности
+            </span>
+          </label>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control  [nzXs]="12" >
+          <button style="width: 100%;" nz-button >Зарегистрироваться</button>
+
+        </nz-form-control>
+        <div nz-col [nzSpan]="12">
+          <button nz-button style="width: 80%;" nzType="default" class="login-form-forgot">Логин</button>
+        </div>
+      </nz-form-item>
+    </form>
+  </div>
+</div>
