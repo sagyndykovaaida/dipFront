@@ -67,23 +67,36 @@
       </nz-form-item>
 
       <nz-form-item nz-row class="register-area">
-        <nz-form-control  >
+        <nz-form-control [nzSpan]="24" >
           <label nz-checkbox formControlName="agree">
-            <span>
+            <span style="   width: 100%;">
               Я согласен с Политикой конфиденциальности
             </span>
           </label>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item nz-row class="register-area">
-        <nz-form-control  [nzXs]="12" >
-          <button style="width: 100%;" nz-button >Зарегистрироваться</button>
 
+<!--      <nz-form-item nz-row class="register-area">-->
+<!--        <nz-form-control  [nzXs]="12" >-->
+<!--          <button style="width: 100%;" nz-button >Зарегистрироваться</button>-->
+
+<!--        </nz-form-control>-->
+<!--&lt;!&ndash;        <div nz-col [nzSpan]="12">&ndash;&gt;-->
+<!--&lt;!&ndash;          <a class="login-form-forgot" style="padding-bottom: 16px;">Логин</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </nz-form-item>-->
+
+
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control  [nzXs]="16" >
+          <button style="width: 100%; padding-bottom: 16px;" nz-button >Зарегистрироваться</button>
         </nz-form-control>
-        <div nz-col [nzSpan]="12">
-          <button nz-button style="width: 80%;" nzType="default" class="login-form-forgot">Логин</button>
-        </div>
+<!--        <div nz-col [nzSpan]="12">-->
+<!--          <a class="login-form-forgot" style="padding-bottom: 16px;">login</a>-->
+<!--        </div>-->
       </nz-form-item>
+
+
     </form>
   </div>
 </div>

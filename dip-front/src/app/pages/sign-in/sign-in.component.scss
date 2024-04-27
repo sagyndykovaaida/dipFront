@@ -1,10 +1,11 @@
+
 .promo-container {
   display: flex;
   align-items: center;
   background: #151515;
   color: white;
   padding-left: 220px;
-  padding-bottom: 152px;
+  padding-bottom: 174px;
   padding-right: 210px;
 }
 
@@ -14,21 +15,7 @@
 }
 
 .promo-container .content {
-  form nz-form-label {
-    color: white;
-  }
-  .register-area label {
-    color: white; /* Color for the checkbox label text */
-  }
-  //.register-area agree {
-  // width: 100%;
-  //  color:red;
-  //}
 
-
-.form-area label{
-  color: white;
-}
   .form-area span{
     color: white;
   }
@@ -55,7 +42,9 @@
   background-color: #151515;
   display: flex;
   align-items: center;
-  padding: 30px 50px;
+  //padding: 30px 50px;
+  padding-top: 100px;
+  padding-bottom: 50px;
   padding-left: 220px;
   padding-right: 120px;
 }

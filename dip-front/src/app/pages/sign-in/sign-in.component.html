@@ -1,0 +1,41 @@
+<div class="logo">
+  <img src="assets/main_logo_W.png" alt="Logo">
+  <h1 style="color: white; padding-top: 10px"> Agile Market Minds</h1>
+</div>
+<div class="promo-container">
+  <div class="graf">
+    <img src="assets/graf.png"  style="width: 450px">
+  </div>
+  <div class="content">
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+      <nz-form-item class="form-area">
+        <nz-form-control [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+          <nz-form-label class="label" [nzXs]="24" nzRequired nzFor="email" style="color: #3b0b0b">
+            <span>Электронная почта</span>
+          </nz-form-label>
+          <input nz-input formControlName="email" id="email" placeholder="Введите почту" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item class="form-area">
+        <nz-form-control [nzXs]="24" nzErrorTip="Please input your password!">
+          <nz-form-label  [nzXs]="24" nzFor="password" nzRequired><span>Пароль</span></nz-form-label>
+          <input
+            nz-input
+            type="password"
+            id="password"
+            formControlName="password"
+            placeholder="Введите пароль"
+          />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item nz-row class="register-area">
+        <nz-form-control  [nzXs]="16" >
+          <button style="width: 100%; padding-bottom: 16px;" nz-button >Login</button>
+        </nz-form-control>
+        <div nz-col [nzSpan]="12">
+          <a class="login-form-forgot" style="padding-bottom: 16px;">Зарегистрироваться</a>
+        </div>
+      </nz-form-item>
+    </form>
+  </div>
+</div>
