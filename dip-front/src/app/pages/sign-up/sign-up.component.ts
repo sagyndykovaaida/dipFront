@@ -1,4 +1,4 @@
-import {Component, ViewEncapsulation} from '@angular/core';
+import {Component} from '@angular/core';
 import {NzFormModule} from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
@@ -8,12 +8,14 @@ import {
   AbstractControl,
   FormControl,
   FormGroup,
-  NonNullableFormBuilder, ReactiveFormsModule,
+  NonNullableFormBuilder,
+  ReactiveFormsModule,
   ValidatorFn,
   Validators
 } from '@angular/forms';
-
+import { NzCardModule } from 'ng-zorro-antd/card';
 import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
+import {NzDividerComponent} from "ng-zorro-antd/divider";
 @Component({
   selector: 'app-sign-up',
   standalone: true,
@@ -25,11 +27,12 @@ import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
     NzIconModule,
     ReactiveFormsModule,
     NzSelectComponent,
-    NzOptionComponent
+    NzOptionComponent,
+    NzCardModule,
+    NzDividerComponent
   ],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
-  encapsulation: ViewEncapsulation.None
 
 })
 export class SignUpComponent {
@@ -54,11 +57,9 @@ export class SignUpComponent {
       });
     }
   }
-
   updateConfirmValidator(): void {
     Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
   }
-
   confirmationValidator: ValidatorFn = (control: AbstractControl): { [s: string]: boolean } => {
     if (!control.value) {
       return { required: true };
@@ -67,7 +68,6 @@ export class SignUpComponent {
     }
     return {};
   };
-
   constructor(private fb: NonNullableFormBuilder) {
     this.validateForm = this.fb.group({
       email: ['', [Validators.email, Validators.required]],

@@ -14,6 +14,9 @@ import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import {NzIconModule} from "ng-zorro-antd/icon";
 import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
+import {NzCardComponent} from "ng-zorro-antd/card";
+import {NzDividerComponent} from "ng-zorro-antd/divider";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-sign-in',
@@ -27,7 +30,10 @@ import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
     NzCheckboxModule,
     NzIconModule,
     NzSelectComponent,
-    NzOptionComponent
+    NzOptionComponent,
+    NzCardComponent,
+    NzDividerComponent,
+    NgIf
   ],
    templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss'
@@ -54,6 +60,13 @@ export class SignInComponent {
       });
     }
   }
+
+  isResetPassword = false;
+
+  toggleResetPassword(): void {
+    this.isResetPassword = !this.isResetPassword;
+  }
+
 
   constructor(private fb: NonNullableFormBuilder) {}
 }

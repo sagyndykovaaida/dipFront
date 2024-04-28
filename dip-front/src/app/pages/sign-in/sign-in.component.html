@@ -1,41 +1,70 @@
-<div class="logo">
-  <img src="assets/main_logo_W.png" alt="Logo">
-  <h1 style="color: white; padding-top: 10px"> Agile Market Minds</h1>
-</div>
-<div class="promo-container">
-  <div class="graf">
-    <img src="assets/graf.png"  style="width: 450px">
+
+
+<div class="main-container">
+  <div class="logo">
+    <img src="assets/main_logo_W.png" alt="Logo">
+    <h1 style="color: white; padding-top: 10px"> Agile Market Minds</h1>
   </div>
-  <div class="content">
-    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-      <nz-form-item class="form-area">
-        <nz-form-control [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-          <nz-form-label class="label" [nzXs]="24" nzRequired nzFor="email" style="color: #3b0b0b">
-            <span>Электронная почта</span>
-          </nz-form-label>
-          <input nz-input formControlName="email" id="email" placeholder="Введите почту" />
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="form-area">
-        <nz-form-control [nzXs]="24" nzErrorTip="Please input your password!">
-          <nz-form-label  [nzXs]="24" nzFor="password" nzRequired><span>Пароль</span></nz-form-label>
-          <input
-            nz-input
-            type="password"
-            id="password"
-            formControlName="password"
-            placeholder="Введите пароль"
-          />
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item nz-row class="register-area">
-        <nz-form-control  [nzXs]="16" >
-          <button style="width: 100%; padding-bottom: 16px;" nz-button >Login</button>
-        </nz-form-control>
-        <div nz-col [nzSpan]="12">
-          <a class="login-form-forgot" style="padding-bottom: 16px;">Зарегистрироваться</a>
-        </div>
-      </nz-form-item>
-    </form>
+  <div class="promo-container" *ngIf="!isResetPassword; else resetPasswordTemplate" >
+    <nz-card class="registration-card">
+      <div class="content">
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <nz-form-item class="form-area">
+            <nz-form-control [nzXs]="24" nzErrorTip="Введите почту!">
+              <nz-form-label class="label" [nzXs]="24" nzRequired nzFor="email" style="color: #3b0b0b">
+                <span>Электронная почта</span>
+              </nz-form-label>
+              <input nz-input formControlName="email" id="email" placeholder="Введите почту" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="form-area">
+            <nz-form-control [nzXs]="24" nzErrorTip="Введите свой пароль!">
+              <nz-form-label  [nzXs]="24" nzFor="password" nzRequired><span>Пароль</span></nz-form-label>
+              <input
+                nz-input
+                type="password"
+                id="password"
+                formControlName="password"
+                placeholder="Введите пароль"
+              />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item nz-row class="register-area" style="justify-content: center">
+            <nz-form-control  [nzXs]="24" >
+              <button style="width: 100%; padding-bottom: 16px;" nz-button nzType="primary" >Login</button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </div>
+      <nz-divider style="background-color: #939395"></nz-divider>
+      <p style="text-align: center"><a (click)="toggleResetPassword()">Забыли пароль?</a></p>
+    </nz-card>
   </div>
+
+  <ng-template #resetPasswordTemplate>
+    <div class="promo-container">
+    <nz-card class="registration-card">
+      <div class="content">
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <nz-form-item class="form-area">
+            <nz-form-control [nzXs]="24" nzErrorTip="Введите почту!">
+              <nz-form-label class="label" [nzXs]="24" nzRequired nzFor="email" style="color: #3b0b0b">
+                <span>Электронная почта</span>
+              </nz-form-label>
+              <input nz-input  placeholder="Введите почту" />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item nz-row class="register-area" style="justify-content: center">
+            <nz-form-control  [nzXs]="24" >
+              <button style="width: 100%; padding-bottom: 16px;" nz-button nzType="primary">Сбросить пароль</button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </div>
+      <nz-divider style="background-color: #939395"></nz-divider>
+      <p style="text-align: center"><a>Логин</a></p>
+    </nz-card>
+    </div>
+  </ng-template>
 </div>
+

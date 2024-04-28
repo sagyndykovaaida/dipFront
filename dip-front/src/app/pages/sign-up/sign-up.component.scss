@@ -1,67 +1,36 @@
 .promo-container {
-  display: flex;
-  align-items: center;
-  background: #151515;
-  color: white;
-  padding-left: 220px;
-  padding-bottom: 152px;
-  padding-right: 210px;
+  padding-left: 510px;
+  margin-top: -50px;
 }
 
+.main-container{
+  width: 1528px;
+  height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.registration-card {
+  width: 500px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,.1);
+  background: #fff;
+  border-radius: 4px;
+}
 .content {
-  margin-left: 200px;
-  margin-right: 129px;
-}
-
-.promo-container .content {
-  form nz-form-label {
-    color: white;
-  }
-  .register-area label {
-    color: white; /* Color for the checkbox label text */
-  }
-  //.register-area agree {
-  // width: 100%;
-  //  color:red;
-  //}
-
-
-.form-area label{
-  color: white;
-}
-  .form-area span{
-    color: white;
-  }
-  button {
-    color: white;
-    border-radius: 20px;
-    background-color: #359A81;
-    border: 3px solid #359A81;
-  }
-}
-
-.login-form-forgot {
-  float: right;
-}
-
-.graf{
   width: 400px;
-  height: 350px;
-  border-radius: 50%;
 }
-
 .logo {
   align-items: center;
   background-color: #151515;
   display: flex;
-  align-items: center;
-  padding: 30px 50px;
-  padding-left: 220px;
-  padding-right: 120px;
+  padding: 50px;
+  justify-content: center;
 }
-
 .logo img {
   height: 43px;
   width: 46px;
 }
+
+
+
 
