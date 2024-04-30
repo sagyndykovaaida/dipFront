@@ -17,23 +17,24 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 import {NzDividerComponent} from "ng-zorro-antd/divider";
 import {AuthService} from "../../services/auth.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [
-    NzFormModule,
-    NzInputModule,
-    NzButtonModule,
-    NzCheckboxModule,
-    NzIconModule,
-    ReactiveFormsModule,
-    NzSelectComponent,
-    NzOptionComponent,
-    NzCardModule,
-    NzDividerComponent
-  ],
+    imports: [
+        NzFormModule,
+        NzInputModule,
+        NzButtonModule,
+        NzCheckboxModule,
+        NzIconModule,
+        ReactiveFormsModule,
+        NzSelectComponent,
+        NzOptionComponent,
+        NzCardModule,
+        NzDividerComponent,
+        RouterLink
+    ],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 

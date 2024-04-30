@@ -15,7 +15,7 @@ import {NzCardComponent} from "ng-zorro-antd/card";
 import {NzDividerComponent} from "ng-zorro-antd/divider";
 import {NgIf} from "@angular/common";
 import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -32,7 +32,8 @@ import {Router} from "@angular/router";
     NzOptionComponent,
     NzCardComponent,
     NzDividerComponent,
-    NgIf
+    NgIf,
+    RouterLink
   ],
    templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss'

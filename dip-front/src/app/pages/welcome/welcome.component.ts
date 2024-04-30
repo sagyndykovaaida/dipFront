@@ -11,6 +11,7 @@ import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import {ReactiveFormsModule} from '@angular/forms';
+import {RouterLink} from "@angular/router";
 @Component({
   selector: 'app-welcome',
   standalone: true,
@@ -32,7 +33,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     NzModalModule,
     NzInputGroupComponent,
     NzInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
