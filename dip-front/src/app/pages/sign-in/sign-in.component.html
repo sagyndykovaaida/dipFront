@@ -1,5 +1,3 @@
-
-
 <div class="main-container">
   <div class="logo">
     <img src="assets/main_logo_W.png" alt="Logo">
@@ -45,7 +43,7 @@
     <div class="promo-container">
     <nz-card class="registration-card">
       <div class="content">
-        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <form nz-form [formGroup]="validateForm" >
           <nz-form-item class="form-area">
             <nz-form-control [nzXs]="24" nzErrorTip="Введите почту!">
               <nz-form-label class="label" [nzXs]="24" nzRequired nzFor="email" style="color: #3b0b0b">
@@ -61,7 +59,7 @@
           </nz-form-item>
         </form>
       </div>
-      <nz-divider style="background-color: #939395"></nz-divider>
+      <nz-divider style="background-color: #939395;" ></nz-divider>
       <p style="text-align: center"><a>Логин</a></p>
     </nz-card>
     </div>

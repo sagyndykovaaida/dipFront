@@ -14,19 +14,6 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item class="form-area">
-        <nz-form-control  [nzXs]="24" nzErrorTip="Введите свой никнейм!">
-          <nz-form-label
-            [nzXs]="24"
-            nzFor="nickname"
-            nzRequired
-            nzTooltipTitle="Как бы вы хотели, чтобы другие называли вас"
-          >
-            <span>Nickname</span>
-          </nz-form-label>
-          <input nz-input id="nickname" formControlName="nickname" placeholder="Введите имя"/>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item class="form-area">
         <nz-form-control [nzXs]="24" nzErrorTip="Введите свой пароль!">
           <nz-form-label  [nzXs]="24" nzFor="password" nzRequired>Пароль</nz-form-label>
           <input
@@ -63,13 +50,13 @@
         </nz-form-control>
       </nz-form-item>
       <nz-form-item nz-row class="register-area" style="justify-content: center">
-        <nz-form-control  [nzXs]="16" >
-          <button style="width: 100%; padding-bottom: 16px;" nz-button >Зарегистрироваться</button>
+        <nz-form-control  [nzXs]="24" >
+          <button style="width: 100%; padding-bottom: 16px;" nz-button nzType="primary" >Зарегистрироваться</button>
         </nz-form-control>
       </nz-form-item>
     </form>
   </div>
-  <nz-divider style="background-color: #939395"></nz-divider>
+  <nz-divider style="background-color: #939395;"></nz-divider>
   <p style="text-align: center"><a>Уже есть аккаунт?</a></p>
 </nz-card>
 </div>

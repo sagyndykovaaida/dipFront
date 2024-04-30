@@ -16,6 +16,9 @@ import {
 import { NzCardModule } from 'ng-zorro-antd/card';
 import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 import {NzDividerComponent} from "ng-zorro-antd/divider";
+import {AuthService} from "../../services/auth.service";
+import {ActivatedRoute, Router} from "@angular/router";
+
 @Component({
   selector: 'app-sign-up',
   standalone: true,
@@ -41,22 +44,32 @@ export class SignUpComponent {
     email: FormControl<string>;
     password: FormControl<string>;
     checkPassword: FormControl<string>;
-    nickname: FormControl<string>;
     agree: FormControl<boolean>;
   }>;
 
   submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
-    } else {
-      Object.values(this.validateForm.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
+
+      this.authService.register(this.validateForm.value.email,this.validateForm.value.password,).subscribe(
+        response => {
+          console.log('User registered successfully');
+          this.authService.saveToken(response.token);
+          this.router.navigate(['/main']);
+        },
+        error => {
+          console.error('There was an error during the registration process', error);
         }
-      });
+      );
+    } else {
+        Object.values(this.validateForm.controls).forEach(control => {
+          if (control.invalid) {
+            control.markAsDirty();
+            control.updateValueAndValidity({ onlySelf: true });
+          }
+        });
     }
   }
+
   updateConfirmValidator(): void {
     Promise.resolve().then(() => this.validateForm.controls.checkPassword.updateValueAndValidity());
   }
@@ -68,13 +81,14 @@ export class SignUpComponent {
     }
     return {};
   };
-  constructor(private fb: NonNullableFormBuilder) {
+  constructor(private fb: NonNullableFormBuilder,
+              private authService: AuthService,
+              private router: Router,
+              private route: ActivatedRoute,) {
     this.validateForm = this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]],
       checkPassword: ['', [Validators.required, this.confirmationValidator]],
-      nickname: ['', [Validators.required]],
-
       agree: [false]
     });
   }

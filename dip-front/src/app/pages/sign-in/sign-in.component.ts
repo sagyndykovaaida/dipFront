@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import {
-  AbstractControl,
-  FormControl,
+  FormBuilder,
   FormGroup,
-  NonNullableFormBuilder,
   ReactiveFormsModule,
-  ValidatorFn,
   Validators
 } from "@angular/forms";
 import {NzFormDirective, NzFormModule} from "ng-zorro-antd/form";
@@ -17,6 +14,8 @@ import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 import {NzCardComponent} from "ng-zorro-antd/card";
 import {NzDividerComponent} from "ng-zorro-antd/divider";
 import {NgIf} from "@angular/common";
+import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sign-in',
@@ -39,18 +38,31 @@ import {NgIf} from "@angular/common";
   styleUrl: './sign-in.component.scss'
 })
 export class SignInComponent {
-  validateForm: FormGroup<{
-    email: FormControl<string>;
-    password: FormControl<string>;
-  }> = this.fb.group({
-    email: ['', [Validators.required]],
-    password: ['', [Validators.required]],
+  validateForm: FormGroup;
+  isResetPassword = false;
 
-  });
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
+              private router: Router,) {
+    this.validateForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
+  }
 
-  submitForm(): void {
+    submitForm(): void {
     if (this.validateForm.valid) {
-      console.log('submit', this.validateForm.value);
+      this.authService.login(this.validateForm.value.email, this.validateForm.value.password)
+        .subscribe(
+          response => {
+            console.log(response);
+            this.authService.saveToken(response.token);
+            this.router.navigate(['/main']);
+          },
+          error => {
+            console.error(error);
+          }
+        );
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {
@@ -60,13 +72,7 @@ export class SignInComponent {
       });
     }
   }
-
-  isResetPassword = false;
-
   toggleResetPassword(): void {
     this.isResetPassword = !this.isResetPassword;
   }
-
-
-  constructor(private fb: NonNullableFormBuilder) {}
 }

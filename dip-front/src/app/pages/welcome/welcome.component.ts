@@ -10,7 +10,7 @@ import {NzButtonComponent} from "ng-zorro-antd/button";
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import {FormControl, FormGroup, NonNullableFormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 @Component({
   selector: 'app-welcome',
   standalone: true,
