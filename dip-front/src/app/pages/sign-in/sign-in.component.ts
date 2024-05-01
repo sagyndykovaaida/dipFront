@@ -17,6 +17,7 @@ import {NgIf} from "@angular/common";
 import {AuthService} from "../../services/auth.service";
 import {Router, RouterLink} from "@angular/router";
 import {NzSpinComponent} from "ng-zorro-antd/spin";
+import {NzNotificationService} from "ng-zorro-antd/notification";
 
 @Component({
   selector: 'app-sign-in',
@@ -46,7 +47,8 @@ export class SignInComponent {
   isLoading = false;
   constructor(private fb: FormBuilder,
               private authService: AuthService,
-              private router: Router,) {
+              private router: Router,
+              private notification: NzNotificationService,) {
     this.validateForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -65,6 +67,12 @@ export class SignInComponent {
             this.router.navigate(['/main']);
           },
           error => {
+            this.isLoading = false;
+            this.notification.create(
+              'error',
+              'Уведомление',
+              'E-mail или пароль неправильно! Попробуйте еще раз. '
+            );
             console.error(error);
           }
         );

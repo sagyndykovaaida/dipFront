@@ -20,6 +20,8 @@ import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import {NgIf} from "@angular/common";
+import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { NzMessageService } from 'ng-zorro-antd/message';
 @Component({
   selector: 'app-sign-up',
   standalone: true,
@@ -52,30 +54,6 @@ export class SignUpComponent {
   }>;
   isLoading = false;
 
-  // submitForm(): void {
-  //   if (this.validateForm.valid) {
-  //
-  //     this.authService.register(this.validateForm.value.email,this.validateForm.value.password,).subscribe(
-  //       response => {
-  //         this.isLoading = true;
-  //         console.log('User registered successfully');
-  //         this.authService.saveToken(response.token);
-  //         this.router.navigate(['/signin']);
-  //       },
-  //       error => {
-  //         console.error('There was an error during the registration process', error);
-  //       }
-  //     );
-  //   } else {
-  //       Object.values(this.validateForm.controls).forEach(control => {
-  //         if (control.invalid) {
-  //           control.markAsDirty();
-  //           control.updateValueAndValidity({ onlySelf: true });
-  //         }
-  //       });
-  //   }
-  // }
-
   submitForm(): void {
     if (this.validateForm.valid) {
       this.isLoading = true;
@@ -88,11 +66,21 @@ export class SignUpComponent {
           console.log('User registered successfully');
           this.authService.saveToken(response.token);
           this.router.navigate(['/signin']);
-          this.isLoading = false; // Set loading to false once the request completes
+          this.isLoading = false;
+          this.notification.create(
+            'success',
+            'Уведомление',
+            'Регистрация успешно завершена!'
+          );
         },
         error => {
           console.error('There was an error during the registration process', error);
-          this.isLoading = false; // Set loading to false if there is an error
+          this.isLoading = false;
+          this.notification.create(
+            'error',
+            'Уведомление',
+            'Ошибка при регистрации! Повторите еще раз.'
+          );
         }
       );
     } else {
@@ -119,7 +107,9 @@ export class SignUpComponent {
   constructor(private fb: NonNullableFormBuilder,
               private authService: AuthService,
               private router: Router,
-              private route: ActivatedRoute,) {
+              private route: ActivatedRoute,
+              private notification: NzNotificationService,
+              private message: NzMessageService) {
     this.validateForm = this.fb.group({
       email: ['', [Validators.email, Validators.required]],
       password: ['', [Validators.required]],
