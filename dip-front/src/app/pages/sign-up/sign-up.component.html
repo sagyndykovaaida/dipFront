@@ -6,6 +6,7 @@
 <div class="promo-container">
 <nz-card class="registration-card">
   <div class="content">
+    <nz-spin nzTip="Loading..." [nzSpinning]="isLoading" [nzDelay]="60">
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
      <nz-form-item class="form-area">
         <nz-form-control [nzXs]="24" nzErrorTip="Введите свой адрес электронной почты">
@@ -55,6 +56,7 @@
         </nz-form-control>
       </nz-form-item>
     </form>
+    </nz-spin>
   </div>
   <nz-divider style="background-color: #939395;"></nz-divider>
     <a routerLink="/signin"><p style="text-align: center">Уже есть аккаунт?</p></a>

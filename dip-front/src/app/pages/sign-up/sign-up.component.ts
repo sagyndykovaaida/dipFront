@@ -18,23 +18,26 @@ import {NzOptionComponent, NzSelectComponent} from "ng-zorro-antd/select";
 import {NzDividerComponent} from "ng-zorro-antd/divider";
 import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import {NgIf} from "@angular/common";
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-    imports: [
-        NzFormModule,
-        NzInputModule,
-        NzButtonModule,
-        NzCheckboxModule,
-        NzIconModule,
-        ReactiveFormsModule,
-        NzSelectComponent,
-        NzOptionComponent,
-        NzCardModule,
-        NzDividerComponent,
-        RouterLink
-    ],
+  imports: [
+    NzFormModule,
+    NzInputModule,
+    NzButtonModule,
+    NzCheckboxModule,
+    NzIconModule,
+    ReactiveFormsModule,
+    NzSelectComponent,
+    NzOptionComponent,
+    NzCardModule,
+    NzDividerComponent,
+    RouterLink,
+    NzSpinModule,
+    NgIf
+  ],
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
 
@@ -47,27 +50,58 @@ export class SignUpComponent {
     checkPassword: FormControl<string>;
     agree: FormControl<boolean>;
   }>;
+  isLoading = false;
+
+  // submitForm(): void {
+  //   if (this.validateForm.valid) {
+  //
+  //     this.authService.register(this.validateForm.value.email,this.validateForm.value.password,).subscribe(
+  //       response => {
+  //         this.isLoading = true;
+  //         console.log('User registered successfully');
+  //         this.authService.saveToken(response.token);
+  //         this.router.navigate(['/signin']);
+  //       },
+  //       error => {
+  //         console.error('There was an error during the registration process', error);
+  //       }
+  //     );
+  //   } else {
+  //       Object.values(this.validateForm.controls).forEach(control => {
+  //         if (control.invalid) {
+  //           control.markAsDirty();
+  //           control.updateValueAndValidity({ onlySelf: true });
+  //         }
+  //       });
+  //   }
+  // }
 
   submitForm(): void {
     if (this.validateForm.valid) {
+      this.isLoading = true;
 
-      this.authService.register(this.validateForm.value.email,this.validateForm.value.password,).subscribe(
+      this.authService.register(
+        this.validateForm.value.email,
+        this.validateForm.value.password,
+      ).subscribe(
         response => {
           console.log('User registered successfully');
           this.authService.saveToken(response.token);
-          this.router.navigate(['/main']);
+          this.router.navigate(['/signin']);
+          this.isLoading = false; // Set loading to false once the request completes
         },
         error => {
           console.error('There was an error during the registration process', error);
+          this.isLoading = false; // Set loading to false if there is an error
         }
       );
     } else {
-        Object.values(this.validateForm.controls).forEach(control => {
-          if (control.invalid) {
-            control.markAsDirty();
-            control.updateValueAndValidity({ onlySelf: true });
-          }
-        });
+      Object.values(this.validateForm.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
     }
   }
 
