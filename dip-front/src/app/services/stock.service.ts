@@ -11,7 +11,7 @@ export class StockService {
 
   constructor(private http: HttpClient) {}
 
-  getStockData(ticker: string, startDate: string, endDate: string): Observable<any> {
+  getStockData(ticker: string, startDate: string | null, endDate: string | null): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/load_data/`, {
       ticker: ticker,
       start_date: startDate,

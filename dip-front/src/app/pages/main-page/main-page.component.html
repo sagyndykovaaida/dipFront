@@ -68,7 +68,7 @@
           >
             <div *nzModalFooter>
               <button nz-button nzType="default" (click)="handleCancel()">Отмена</button>
-              <button nz-button nzType="primary" (click)="loadStockData()"   [nzLoading]="isOkLoading">Загрузить данные</button>
+              <button nz-button nzType="primary" (click)="handleOk()"   [nzLoading]="isOkLoading">Загрузить данные</button>
             </div>
             <ng-container *nzModalContent>
               <div class="stock-input">
@@ -77,17 +77,25 @@
                   <input nz-input [(ngModel)]="ticker" placeholder="Введите тикер">
                 </div>
                 <div class="items">
-                  <nz-date-picker [(ngModel)]="startDate"  nzPlaceHolder="с"  nzFormat="dd-MM-yyyy"></nz-date-picker>
-
+                  <nz-date-picker [(ngModel)]="startDate"   (ngModelChange)="startDate = formatDate($event, 'yyyy-MM-dd', 'en-US')"
+                                  nzPlaceHolder="с" nzFormat="dd.MM.yyyy"></nz-date-picker>
+<!--                  <input [(ngModel)]="startDate" type="date">-->
                 </div>
                 <div class="items">
-                  <nz-date-picker [(ngModel)]="endDate"  nzPlaceHolder="до"  nzFormat="dd-MM-yyyy"></nz-date-picker>
-
+                  <nz-date-picker [(ngModel)]="endDate"  nzPlaceHolder="до" nzFormat="dd.MM.yyyy" ></nz-date-picker>
+<!--                  <input [(ngModel)]="endDate" type="date">-->
+                </div>
+                <div>
+                  <button (click)="loadStockData()">Load Data</button>
                 </div>
 
               </div>
             </ng-container>
           </nz-modal>
+
+          <div>
+            <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+          </div>
         </div>
 
         <div nz-col nzSpan="6" nzOffset="3" class="company-list">
