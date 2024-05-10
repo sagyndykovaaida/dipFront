@@ -122,11 +122,18 @@ nz-breadcrumb {
 }
 .analyze-content{
   background:#ffffff;
-  display: flex;
+  //display: flex;
+  padding-left: 20px;
   justify-content: center;
-  padding-right: 300px;
+  //padding-right: -100px;
   border-radius: 5px;
+  padding-top: 20px;
+
+  button{
+    margin-right: 30px;
+  }
 }
+
 
 
 .company-list{
@@ -139,6 +146,14 @@ nz-layout{
   height: 678px;
 }
 
+.items{
+  padding-top: 20px;
+  padding-left: 70px;
+  width: 350px;
+}
 
+nz-date-picker{
+ width: 280px;
+}
 
 

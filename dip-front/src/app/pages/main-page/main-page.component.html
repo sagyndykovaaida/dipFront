@@ -17,7 +17,6 @@
 <!--        <nz-avatar nzText="U"></nz-avatar>-->
 <!--        <span> User</span>-->
 <!--      </li>-->
-
     </ul>
   </nz-header>
   <nz-layout>
@@ -50,95 +49,50 @@
                 <img src = {{stock.icon}} style="width: 40px; height: 40px;"/>
                 <span> {{stock.name}}</span>
               </div>
-
-<!--              <div nz-col [nzSpan]="24">-->
-<!--                <div style="padding-right: 200px">-->
-<!--                  <div nz-row [nzGutter]="24" >Цена акций</div>-->
-<!--                  <div nz-row [nzGutter]="24">Общая доходность</div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div nz-col [nzSpan]="24"><div >-->
-<!--                <div nz-row [nzGutter]="24">{{stock.price }}</div>-->
-<!--                <div nz-row [nzGutter]="24">{{stock.change  }}</div>-->
-<!--              </div></div>-->
-
-
             </div>
           </li>
         </ul>
-
       </div>
 
-<!--      <div class="header-content">-->
-<!--        <ul class="stock-list-header">-->
-<!--          <li *ngFor="let stock of stocks">-->
-<!--            <div class="stock-row">-->
-<!--              <div class="stock-icon">-->
-<!--                <img [src]="stock.icon" alt="{{ stock.name }}"/>-->
-<!--                <span>{{ stock.name }}</span>-->
-<!--              </div>-->
-
-<!--              <div class="stock-info">-->
-<!--                <div class="stock-quantity">Количество акций</div>-->
-<!--                <div class="stock-return">Общая доходность</div>-->
-<!--              </div>-->
-
-<!--              <div class="stock-data">-->
-<!--                <div class="stock-price">{{ stock.price }}</div>-->
-<!--                <div class="stock-change">{{ stock.change }}</div>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </div>-->
-
-
       <div nz-row class="second-content">
+        <div nz-col nzSpan="15" class="analyze-content">
+          <button nz-button nzType="default" nzShape="round">1 день</button>
+          <button nz-button nzType="primary" nzShape="round">1 неделя</button>
+          <button nz-button nzType="default" nzShape="round">1 месяц</button>
+          <button nz-button nzType="default" nzShape="round">1 год</button>
+            <mat-icon style="margin-left: 250px" (click)="showModal()">settings</mat-icon>
+          <nz-modal
+            [(nzVisible)]="isVisible"
+            (nzOnCancel)="handleCancel()"
+            nzTitle="Цены ЦБ в промежутке "
+          >
+            <div *nzModalFooter>
+              <button nz-button nzType="default" (click)="handleCancel()">Отмена</button>
+              <button nz-button nzType="primary" (click)="loadStockData()"   [nzLoading]="isOkLoading">Загрузить данные</button>
+            </div>
+            <ng-container *nzModalContent>
+              <div class="stock-input">
 
-        <div nz-col nzSpan="14" class="analyze-content">
-          <div class="chart-controls">
-            <button nz-button nzType="default" nzShape="round">1 день</button>
-            <button nz-button nzType="primary" nzShape="round">1 неделя</button>
-            <button nz-button nzType="default" nzShape="round">1 месяц</button>
-            <button nz-button nzType="default" nzShape="round">1 год</button>
-          </div>
+                <div class="items">
+                  <input nz-input [(ngModel)]="ticker" placeholder="Введите тикер">
+                </div>
+                <div class="items">
+                  <nz-date-picker [(ngModel)]="startDate"  nzPlaceHolder="с"  nzFormat="dd-MM-yyyy"></nz-date-picker>
 
-        </div>
-
-        <div nz-col nzSpan="6" nzOffset="4" class="company-list">
-          <h3 style="padding-left: 20px">Список </h3>
-          <div class="stock-list-container">
-            <ul class="stock-list">
-              <li *ngFor="let stock of stocks">
-                <div nz-row [nzGutter]="24">
-
-                  <div nz-col class="gutter-row" [nzSpan]="5">
-                    <div>
-                    <img src = {{stock.icon}} style="width: 40px; height: 40px;"/>
-                    </div>
-                  </div>
-
-                  <div nz-col class="gutter-row" [nzSpan]="8">
-                    <div>
-                    <div nz-row >{{stock.ticker}}</div>
-                    <div nz-row>{{stock.name}}</div>
-                  </div>
-                  </div>
-
-                  <div nz-col class="gutter-row" [nzSpan]="8">
-                    <div style="padding-left: 70px" >
-                    <div nz-row >{{stock.price }}</div>
-                    <div nz-row>{{stock.change  }}</div>
-                    </div>
-                  </div>
+                </div>
+                <div class="items">
+                  <nz-date-picker [(ngModel)]="endDate"  nzPlaceHolder="до"  nzFormat="dd-MM-yyyy"></nz-date-picker>
 
                 </div>
 
-              </li>
-            </ul>
+              </div>
+            </ng-container>
+          </nz-modal>
+        </div>
+
+        <div nz-col nzSpan="6" nzOffset="3" class="company-list">
+          <div class="stock-list-container">
           </div>
-
-
         </div>
       </div>
     </nz-layout>
