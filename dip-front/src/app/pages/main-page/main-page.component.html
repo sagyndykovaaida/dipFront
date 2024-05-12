@@ -7,7 +7,7 @@
     <ul nz-menu nzTheme="light" nzMode="horizontal" class="header-menu">
       <li nz-menu-item >
         <nz-input-group [nzSuffix]="suffixIconSearch">
-          <input type="text" nz-input placeholder="Поиск различных акций" />
+          <input type="text" nz-input [(ngModel)]="selectedTicker" placeholder="Enter Ticker" />
         </nz-input-group>
         <ng-template #suffixIconSearch>
           <span nz-icon nzType="search"></span>
@@ -46,7 +46,7 @@
 <!--            main div-->
             <div nz-row [nzGutter]="24">
               <div>
-                <img src = {{stock.icon}} style="width: 40px; height: 40px;"/>
+                <img src = {{stock.logo}} style="width: 40px; height: 40px;"/>
                 <span> {{stock.name}}</span>
               </div>
             </div>
@@ -56,10 +56,10 @@
 
       <div nz-row class="second-content">
         <div nz-col nzSpan="15" class="analyze-content">
-          <button nz-button nzType="default" nzShape="round">1 день</button>
-          <button nz-button nzType="primary" nzShape="round">1 неделя</button>
-          <button nz-button nzType="default" nzShape="round">1 месяц</button>
-          <button nz-button nzType="default" nzShape="round">1 год</button>
+          <button nz-button nzType="default" nzShape="round" (click)="loadData(selectedTicker, '1D')">1 день</button>
+          <button nz-button nzType="primary" nzShape="round" (click)="loadData(selectedTicker, '1W')">1 неделя</button>
+          <button nz-button nzType="default" nzShape="round" (click)="loadData(selectedTicker, '1M')">1 месяц</button>
+          <button nz-button nzType="default" nzShape="round" (click)="loadData(selectedTicker, '1Y')">1 год</button>
             <mat-icon style="margin-left: 250px" (click)="showModal()">settings</mat-icon>
           <nz-modal
             [(nzVisible)]="isVisible"

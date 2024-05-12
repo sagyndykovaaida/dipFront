@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {NzContentComponent, NzHeaderComponent, NzLayoutComponent, NzSiderComponent} from "ng-zorro-antd/layout";
 import {NzBreadCrumbComponent, NzBreadCrumbItemComponent} from "ng-zorro-antd/breadcrumb";
 import {NzMenuDirective, NzMenuItemComponent, NzSubMenuComponent} from "ng-zorro-antd/menu";
@@ -20,6 +20,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import {NzFormControlComponent, NzFormDirective, NzFormItemComponent, NzFormLabelComponent} from "ng-zorro-antd/form";
 import {MatIcon} from "@angular/material/icon";
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import Plotly from 'plotly.js/dist/plotly.js';
 PlotlyModule.plotlyjs = PlotlyJS;
 interface StockData {
   Date: string;
@@ -68,7 +69,6 @@ interface StockData {
 })
 export class MainPageComponent {
 
-
   isVisible = false;
   isOkLoading = false;
 
@@ -92,21 +92,49 @@ export class MainPageComponent {
   date = null;
   timeRange: string = '1D';
   stocks = [
-    { icon: 'https://logo.clearbit.com/spotify.com', name: 'Spotify', ticker: 'SPOT', price: '$310,40', change: '-1,10%' },
-    { icon: 'https://logo.clearbit.com/airbnb.com', name: 'Airbnb', ticker: 'ABNB', price: '$310,40', change: '-1,10%' },
-    { icon: 'https://logo.clearbit.com/shopify.com', name: 'Shopify', ticker: 'SHOP', price: '$310,40', change: '1,10%' },
-    { icon: 'https://logo.clearbit.com/google.com', name: 'Google', ticker: 'GOOGL', price: '$310,40', change: '-1,10%' },
-    { icon: 'https://logo.clearbit.com/playstation.com', name: 'Playstation', ticker: 'SONY', price: '$310,40', change: '-1,10%' },
-    { icon: 'https://logo.clearbit.com/paypal.com', name: 'Paypal', ticker: 'PYPL', price: '$310,40', change: '-1,10%' },
-    { icon: 'https://logo.clearbit.com/ibm.com', name: 'IBM', ticker: 'IBM', price: '$310,40', change: '-1,10%' },
-    { icon: 'https://logo.clearbit.com/apple.com', name: 'Apple', ticker: 'APPL', price: '$310,40', change: '-1,10%' },
-    { icon: 'https://logo.clearbit.com/microsoft.com', name: 'Microsoft', ticker: 'MSFT', price: '$310,40', change: '-1,10%' },
-    { icon: 'https://logo.clearbit.com/intel.com', name: 'Intel Corp', ticker: 'INTC', price: '$310,40', change: '-1,10%' },
-    // Добавьте другие акции здесь
-  ];
-  ticker: string = '';
+    { name: 'Apple', ticker: 'AAPL', logo: 'https://logo.clearbit.com/apple.com' },
+    { name: 'Microsoft', ticker: 'MSFT', logo: 'https://logo.clearbit.com/microsoft.com' },
+    { name: 'Google', ticker: 'GOOGL', logo: 'https://logo.clearbit.com/google.com' },
+    { name: 'Amazon', ticker: 'AMZN', logo: 'https://logo.clearbit.com/amazon.com' },
+    { name: 'Facebook', ticker: 'FB', logo: 'https://logo.clearbit.com/facebook.com' },
+    { name: 'Tesla', ticker: 'TSLA', logo: 'https://logo.clearbit.com/tesla.com' },
+    { name: 'Berkshire Hathaway', ticker: 'BRK.A', logo: 'https://logo.clearbit.com/berkshirehathaway.com' },
+    { name: 'Visa', ticker: 'V', logo: 'https://logo.clearbit.com/visa.com' },
+    { name: 'Walmart', ticker: 'WMT', logo: 'https://logo.clearbit.com/walmart.com' },
+    { name: 'Procter & Gamble', ticker: 'PG', logo: 'https://logo.clearbit.com/pg.com' },
+    { name: 'Nvidia', ticker: 'NVDA', logo: 'https://logo.clearbit.com/nvidia.com' },
+    { name: 'MasterCard', ticker: 'MA', logo: 'https://logo.clearbit.com/mastercard.com' },
+    { name: 'Home Depot', ticker: 'HD', logo: 'https://logo.clearbit.com/homedepot.com' },
+    { name: 'UnitedHealth', ticker: 'UNH', logo: 'https://logo.clearbit.com/unitedhealthgroup.com' },
+    { name: 'Verizon', ticker: 'VZ', logo: 'https://logo.clearbit.com/verizon.com' },
+    { name: 'Disney', ticker: 'DIS', logo: 'https://logo.clearbit.com/disney.com' },
+    { name: 'Adobe', ticker: 'ADBE', logo: 'https://logo.clearbit.com/adobe.com' },
+    { name: 'PayPal', ticker: 'PYPL', logo: 'https://logo.clearbit.com/paypal.com' },
+    { name: 'Comcast', ticker: 'CMCSA', logo: 'https://logo.clearbit.com/comcast.com' },
+    { name: 'Netflix', ticker: 'NFLX', logo: 'https://logo.clearbit.com/netflix.com' },
+    { name: 'Cisco Systems', ticker: 'CSCO', logo: 'https://logo.clearbit.com/cisco.com' },
+    { name: 'Intel', ticker: 'INTC', logo: 'https://logo.clearbit.com/intel.com' },
+    { name: 'PepsiCo', ticker: 'PEP', logo: 'https://logo.clearbit.com/pepsico.com' },
+    { name: 'Coca-Cola', ticker: 'KO', logo: 'https://logo.clearbit.com/coca-cola.com' },
+    { name: 'Oracle', ticker: 'ORCL', logo: 'https://logo.clearbit.com/oracle.com' },
+    { name: 'Nike', ticker: 'NKE', logo: 'https://logo.clearbit.com/nike.com' },
+    { name: 'ExxonMobil', ticker: 'XOM', logo: 'https://logo.clearbit.com/exxonmobil.com' },
+    { name: 'Pfizer', ticker: 'PFE', logo: 'https://logo.clearbit.com/pfizer.com' },
+    { name: 'Chevron', ticker: 'CVX', logo: 'https://logo.clearbit.com/chevron.com' },
+    { name: 'AT&T', ticker: 'T', logo: 'https://logo.clearbit.com/att.com' },
+    { name: 'Abbott Laboratories', ticker: 'ABT', logo: 'https://logo.clearbit.com/abbott.com' },
+    { name: 'McDonald’s', ticker: 'MCD', logo: 'https://logo.clearbit.com/mcdonalds.com' },
+    { name: 'Merck', ticker: 'MRK', logo: 'https://logo.clearbit.com/merck.com' },
+    { name: 'Qualcomm', ticker: 'QCOM', logo: 'https://logo.clearbit.com/qualcomm.com' },
+    { name: 'Salesforce', ticker: 'CRM', logo: 'https://logo.clearbit.com/salesforce.com' },
+    { name: 'Medtronic', ticker: 'MDT', logo: 'https://logo.clearbit.com/medtronic.com' }
+];
+
+
+    ticker: string = '';
   startDate: string = '';
   endDate: string = '';
+
   graph: any = {
     data: [
       { x: [], y: [], type: 'scatter', mode: 'lines+markers', marker: {color: 'blue'} },
@@ -243,16 +271,33 @@ export class MainPageComponent {
     return traces;  // Возвращаем массив traces для отображения на графике
   }
 
+  @ViewChild('plotElement') plotElement!: ElementRef;
+  selectedTicker = '';
 
-  loadDailyData(ticker: string) {
-    this.stockService.getDailyData(ticker).subscribe(data => {
-      console.log(data);
-      // Здесь вы можете делать что-то с данными
-    }, error => {
-      console.error('Error fetching daily data', error);
+
+  loadData(ticker: string, timeframe: string): void {
+    const timeframeMap: { [key: string]: string } = {
+      '1D': 'day',
+      '1W': 'week',
+      '1M': 'month',
+      '1Y': 'year'
+    };
+
+    this.stockService.getDataForTimeframe(ticker, timeframeMap[timeframe]).subscribe({
+      next: (data: any[]) => {
+        console.log('Data received:', data); // Log the data
+        this.graph.data = [{
+          x: data.map(d => d.Date),
+          y: data.map(d => d.Close),
+          type: 'scatter',
+          mode: 'lines+markers',
+          marker: { color: 'green' }
+        }];
+        this.graph.layout.title = `Closing Price of ${ticker}`;
+      },
+      error: (error: any) => console.error('Error loading stock data:', error)
     });
   }
-
 
   protected readonly formatDate = formatDate;
 }

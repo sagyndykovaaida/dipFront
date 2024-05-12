@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class StockService {
 
-  private apiUrl = 'http://127.0.0.1:8000'; // Adjust your API URL accordingly
+  private apiUrl = 'http://127.0.0.1:8000';
 
   constructor(private http: HttpClient) {}
 
@@ -19,17 +19,7 @@ export class StockService {
     });
   }
 
-  getDailyData(ticker: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/data/day/`, { ticker });
-  }
-
-  getWeeklyData(ticker: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/data/week/`, { ticker });
-  }
-  getMonthlyData(ticker: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/data/month/`, { ticker });
-  }
-  getYearlyData(ticker: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/data/year/`, { ticker });
+  getDataForTimeframe(ticker: string, timeframe: string): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl}/data/${timeframe}/`, { ticker });
   }
 }
