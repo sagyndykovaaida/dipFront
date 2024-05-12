@@ -20,7 +20,7 @@
     </ul>
   </nz-header>
   <nz-layout>
-    <nz-sider nzWidth="200px" nzTheme="light">
+    <nz-sider  nzTheme="light">
       <ul nz-menu nzMode="inline" class="sider-menu">
         <li nz-submenu nzOpen nzIcon="user" nzTitle="Бета версия">
           <ul>
@@ -39,21 +39,6 @@
       </ul>
     </nz-sider>
     <nz-layout class="inner-layout">
-
-      <div class="header-content">
-        <ul class="stock-list-header">
-          <li *ngFor="let stock of stocks">
-<!--            main div-->
-            <div nz-row [nzGutter]="24">
-              <div>
-                <img src = {{stock.logo}} style="width: 40px; height: 40px;"/>
-                <span> {{stock.name}}</span>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
       <div nz-row class="second-content">
         <div nz-col nzSpan="15" class="analyze-content">
           <button nz-button nzType="default" nzShape="round" (click)="loadData(selectedTicker, '1D')">1 день</button>
