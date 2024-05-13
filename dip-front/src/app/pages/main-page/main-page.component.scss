@@ -8,141 +8,49 @@ nz-header{
   background: #ffffff;
   padding-left: 0;
 }
-
-.gradient-text {
-
-  background: linear-gradient(to right, purple, orange, yellow);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  border-radius: 5px;
-}
-
-
 .sider-menu {
   height: 100%;
 }
 
 .inner-layout {
-  padding: 44px 45px 750px 44px;
-}
-
-nz-breadcrumb {
-  margin: 16px 0;
-}
-
-.stock-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.stock-logo {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-}
-
-.stock-price {
-  margin-right: 10px;
-}
-
-.stock-line {
-  width: 100px;
-  height: 20px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  margin-right: 10px;
-}
-
-
-.stock-change.negative {
-  color: red;
-}
-
-.stock-list-container {
-  max-height: 360px;
-  overflow-y: auto;
-}
-
-.stock-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.stock-list-header{
-  list-style-type: none;
-  display: flex;
-  padding-right: 30px;
-}
-.stock-list-header li {
-  display: flex;
-  margin-right: 60px;
-  align-items: center;
-  padding: 10px;
-}
-.stock-list li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-}
-.chart-controls{
-  padding-top: 20px;
-}
-.chart-controls button{
-  margin-right: 20px;
-}
-
-.inner-box {
-  padding-right: 40px;
-}
-
-.stock-list-container::-webkit-scrollbar {
-  width: 10px;
-}
-
-.stock-list-container {
-  -ms-overflow-style: none;
-  scrollbar-width: thin;
-}
-
-.stock{
-  display: flex;
-}
-
-.header-content{
-  background: #ffffff;
-  border-radius: 5px;
+  padding: 24px 25px 300px 24px;
 }
 
 .second-content {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 .analyze-content{
   background:#ffffff;
-  //display: flex;
   padding-left: 20px;
   justify-content: center;
-  //padding-right: -100px;
   border-radius: 5px;
   padding-top: 20px;
+  padding-bottom: 100px;
 
   button{
     margin-right: 30px;
   }
 }
 
+.list{
+  display: flex;
+  padding-top: 20px;
+  padding-left: 20px;
+  width: 250px;
 
+}
 
+.graph{
+  width: 200px;
+  height: 100px;
+}
 .company-list{
   background:#ffffff;
   height: 450px;
   border-radius: 5px;
 }
 nz-layout{
-  width:1545px;
+  width:1528px;
   height: 678px;
 }
 
@@ -153,7 +61,5 @@ nz-layout{
 }
 
 nz-date-picker{
- width: 280px;
+  width: 280px;
 }
-
-

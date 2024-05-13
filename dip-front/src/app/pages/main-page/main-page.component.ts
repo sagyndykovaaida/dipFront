@@ -88,50 +88,9 @@ export class MainPageComponent {
     this.isVisible = false;
   }
 
-
   date = null;
   timeRange: string = '1D';
-  stocks = [
-    { name: 'Apple', ticker: 'AAPL', logo: 'https://logo.clearbit.com/apple.com' },
-    { name: 'Microsoft', ticker: 'MSFT', logo: 'https://logo.clearbit.com/microsoft.com' },
-    { name: 'Google', ticker: 'GOOGL', logo: 'https://logo.clearbit.com/google.com' },
-    { name: 'Amazon', ticker: 'AMZN', logo: 'https://logo.clearbit.com/amazon.com' },
-    { name: 'Facebook', ticker: 'FB', logo: 'https://logo.clearbit.com/facebook.com' },
-    { name: 'Tesla', ticker: 'TSLA', logo: 'https://logo.clearbit.com/tesla.com' },
-    { name: 'Berkshire Hathaway', ticker: 'BRK.A', logo: 'https://logo.clearbit.com/berkshirehathaway.com' },
-    { name: 'Visa', ticker: 'V', logo: 'https://logo.clearbit.com/visa.com' },
-    { name: 'Walmart', ticker: 'WMT', logo: 'https://logo.clearbit.com/walmart.com' },
-    { name: 'Procter & Gamble', ticker: 'PG', logo: 'https://logo.clearbit.com/pg.com' },
-    { name: 'Nvidia', ticker: 'NVDA', logo: 'https://logo.clearbit.com/nvidia.com' },
-    { name: 'MasterCard', ticker: 'MA', logo: 'https://logo.clearbit.com/mastercard.com' },
-    { name: 'Home Depot', ticker: 'HD', logo: 'https://logo.clearbit.com/homedepot.com' },
-    { name: 'UnitedHealth', ticker: 'UNH', logo: 'https://logo.clearbit.com/unitedhealthgroup.com' },
-    { name: 'Verizon', ticker: 'VZ', logo: 'https://logo.clearbit.com/verizon.com' },
-    { name: 'Disney', ticker: 'DIS', logo: 'https://logo.clearbit.com/disney.com' },
-    { name: 'Adobe', ticker: 'ADBE', logo: 'https://logo.clearbit.com/adobe.com' },
-    { name: 'PayPal', ticker: 'PYPL', logo: 'https://logo.clearbit.com/paypal.com' },
-    { name: 'Comcast', ticker: 'CMCSA', logo: 'https://logo.clearbit.com/comcast.com' },
-    { name: 'Netflix', ticker: 'NFLX', logo: 'https://logo.clearbit.com/netflix.com' },
-    { name: 'Cisco Systems', ticker: 'CSCO', logo: 'https://logo.clearbit.com/cisco.com' },
-    { name: 'Intel', ticker: 'INTC', logo: 'https://logo.clearbit.com/intel.com' },
-    { name: 'PepsiCo', ticker: 'PEP', logo: 'https://logo.clearbit.com/pepsico.com' },
-    { name: 'Coca-Cola', ticker: 'KO', logo: 'https://logo.clearbit.com/coca-cola.com' },
-    { name: 'Oracle', ticker: 'ORCL', logo: 'https://logo.clearbit.com/oracle.com' },
-    { name: 'Nike', ticker: 'NKE', logo: 'https://logo.clearbit.com/nike.com' },
-    { name: 'ExxonMobil', ticker: 'XOM', logo: 'https://logo.clearbit.com/exxonmobil.com' },
-    { name: 'Pfizer', ticker: 'PFE', logo: 'https://logo.clearbit.com/pfizer.com' },
-    { name: 'Chevron', ticker: 'CVX', logo: 'https://logo.clearbit.com/chevron.com' },
-    { name: 'AT&T', ticker: 'T', logo: 'https://logo.clearbit.com/att.com' },
-    { name: 'Abbott Laboratories', ticker: 'ABT', logo: 'https://logo.clearbit.com/abbott.com' },
-    { name: 'McDonald’s', ticker: 'MCD', logo: 'https://logo.clearbit.com/mcdonalds.com' },
-    { name: 'Merck', ticker: 'MRK', logo: 'https://logo.clearbit.com/merck.com' },
-    { name: 'Qualcomm', ticker: 'QCOM', logo: 'https://logo.clearbit.com/qualcomm.com' },
-    { name: 'Salesforce', ticker: 'CRM', logo: 'https://logo.clearbit.com/salesforce.com' },
-    { name: 'Medtronic', ticker: 'MDT', logo: 'https://logo.clearbit.com/medtronic.com' }
-];
-
-
-    ticker: string = '';
+  ticker: string = '';
   startDate: string = '';
   endDate: string = '';
 
@@ -141,6 +100,56 @@ export class MainPageComponent {
     ],
     layout: {title: 'Stock Price'}
   };
+
+
+  ticker1: string = '';
+  ticker2: string = '';
+  graphs: any[] = [];
+  dataLoaded: { [key: string]: any } = {};  // To track data loading completion and store results
+
+  loadDataAnalyze(ticker1: string, ticker2: string): void {
+    this.loadStockDataAnalyze(ticker1);
+    this.loadStockDataAnalyze(ticker2);
+  }
+
+  loadStockDataAnalyze(ticker: string): void {
+    this.stockService.getDataForTimeframe(ticker, '1M').subscribe({
+      next: (data: any[]) => {
+        const averagePrice = data.reduce((acc, curr) => acc + curr.Close, 0) / data.length;
+        this.dataLoaded[ticker] = {
+          averagePrice: averagePrice,
+          data: data,
+          loaded: true
+        };
+        this.updateGraphs();
+      },
+      error: (error: any) => console.error('Error loading stock data for', ticker, ':', error)
+    });
+  }
+
+  updateGraphs(): void {
+    if (this.dataLoaded[this.ticker1]?.loaded && this.dataLoaded[this.ticker2]?.loaded) {
+      [this.ticker1, this.ticker2].forEach((ticker: string) => {
+        const otherTicker = ticker === this.ticker1 ? this.ticker2 : this.ticker1;
+        const graph = {
+          data: [{
+            x: this.dataLoaded[ticker].data.map((d: StockData) => d.Date),
+            y: this.dataLoaded[ticker].data.map((d: StockData) => d.Close),
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: { color: this.dataLoaded[ticker].averagePrice >= this.dataLoaded[otherTicker].averagePrice ? 'green' : 'red' }
+          }],
+          layout: {
+            title: `Monthly Closing Price of ${ticker}`,
+            xaxis: { title: 'Date' },
+            yaxis: { title: 'Closing Price' }
+          }
+        };
+        this.graphs.push(graph);
+      });
+    }
+  }
+
 
   onChange(result: Date): void {
     console.log('onChange: ', result);
@@ -168,112 +177,16 @@ export class MainPageComponent {
         console.error('Error loading stock data:', error);
       }
     });
+    this.isOkLoading = true;
+    setTimeout(() => {
+      this.isVisible = false;
+      this.isOkLoading = false;
+    }, 1000);
 
-  }
-
-
-  // loadStockData() {
-  //   const ticker = this.ticker;
-  //   const startDate = this.startDate ? formatDate(this.startDate, 'yyyy-MM-dd', 'en-US') : null;
-  //   const endDate = this.endDate ? formatDate(this.endDate, 'yyyy-MM-dd', 'en-US') : null;
-  //
-  //   this.stockService.getStockData(ticker, startDate, endDate).subscribe({
-  //     next: (data: StockData[]) => {
-  //       const preparedData = this.prepareDynamicData(data);
-  //       this.graph.data = preparedData;
-  //       this.graph.layout = {
-  //         title: `Closing Price of ${ticker}`,
-  //         xaxis: { type: 'date', title: 'Date' },
-  //         yaxis: { title: 'Price' },
-  //         paper_bgcolor: 'rgba(0,0,0,0)',
-  //         plot_bgcolor: 'rgba(0,0,0,0)',
-  //         // showlegend: false
-  //       };
-  //     },
-  //     error: (error) => {
-  //       console.error('Error loading stock data:', error);
-  //     }
-  //   });
-  // }
-
-
-  // prepareDynamicData(data: StockData[]) {
-  //   const traces = [];
-  //   let currentTrace = {
-  //     x: [data[0].Date],
-  //     y: [data[0].Close],
-  //     type: 'scatter',
-  //     mode: 'lines+markers',
-  //     line: {
-  //       color: 'green',  // Начальный цвет линии
-  //       width: 2
-  //     },
-  //     fill: 'tozeroy',
-  //     fillcolor: 'rgba(0, 255, 0, 0.3)'  // Начальный цвет заливки
-  //   };
-  //
-  //   for (let i = 1; i < data.length; i++) {
-  //     const increase = data[i].Close > data[i - 1].Close;
-  //     const color = increase ? 'green' : 'red';
-  //     const fillcolor = `rgba(${increase ? '0, 255, 0' : '255, 0, 0'}, 0.3)`; // Цвет заливки в зависимости от тенденции
-  //
-  //     if (currentTrace.line.color !== color) {
-  //       traces.push(currentTrace);  // Заканчиваем текущий сегмент и добавляем его в массив
-  //       currentTrace = {            // Начинаем новый сегмент
-  //         x: [data[i].Date],
-  //         y: [data[i].Close],
-  //         type: 'scatter',
-  //         mode: 'lines+markers',
-  //         line: {
-  //           color: color,
-  //           width: 2
-  //         },
-  //         fill: 'tozeroy',
-  //         fillcolor: fillcolor  // Устанавливаем цвет заливки для нового сегмента
-  //       };
-  //     } else {
-  //       // Продолжаем добавлять данные в текущий сегмент
-  //       currentTrace.x.push(data[i].Date);
-  //       currentTrace.y.push(data[i].Close);
-  //     }
-  //   }
-  //
-  //   // Добавляем последний сегмент в массив, если он не был добавлен
-  //   traces.push(currentTrace);
-  //
-  //   return traces;  // Возвращаем массив сегментов для отображения на графике
-  // }
-
-  prepareDynamicData(data: StockData[]) {
-    const traces = [];
-    let currentTrace = {
-      x: [] as string[],  // Указание, что x - это массив строк
-      y: [] as number[],  // Указание, что y - это массив чисел
-      type: 'scatter',
-      mode: 'lines+markers',
-      marker: {
-        color: 'green',
-        width: 2
-      },
-      fill: 'tozeroy',
-      fillcolor: 'rgba(54,246,58,0.3)'
-    };
-
-
-    // Просто добавляем все данные в текущий trace
-    data.forEach(point => {
-      currentTrace.x.push(point.Date);
-      currentTrace.y.push(point.Close);
-    });
-
-    traces.push(currentTrace); // Добавляем полный trace в массив traces
-
-    return traces;  // Возвращаем массив traces для отображения на графике
   }
 
   @ViewChild('plotElement') plotElement!: ElementRef;
   selectedTicker = '';
-
 
   loadData(ticker: string, timeframe: string): void {
     const timeframeMap: { [key: string]: string } = {
