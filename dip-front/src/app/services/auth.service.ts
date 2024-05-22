@@ -3,10 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import {FormControl, ɵValue} from "@angular/forms";
 
-export interface User {
-  email: string;
-  password: string;
-}
 @Injectable({
   providedIn: 'root'
 })

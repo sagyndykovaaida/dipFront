@@ -54,7 +54,6 @@ export class SignInComponent {
       password: ['', [Validators.required]],
     });
   }
-
     submitForm(): void {
     if (this.validateForm.valid) {
       this.isLoading = true;

@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #151515;
+  background-color: #ffffff;
   padding: 30px 70px;
   padding-left: 120px;
   padding-right: 120px;
@@ -20,7 +20,7 @@
   padding-left: 650px;
 }
 .nav li {
-  color: white;
+  color: black;
   font-family: Inter;
   font-size: 16px;
   cursor: pointer;
@@ -40,8 +40,19 @@
 .promo-container {
   display: flex;
   align-items: center;
-  background: #151515;
-  color: white;
+  background: #ECEEF1;
+  color: black;
+  padding-left: 180px;
+  padding-top: 150px;
+  padding-bottom: 180px;
+  padding-right: 210px;
+}
+
+.promo-container1 {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  color: black;
   padding-left: 180px;
   padding-top: 150px;
   padding-bottom: 180px;
@@ -74,12 +85,12 @@
   margin-left: 200px;
 
   h1 {
-    color: white;
+    color: black;
     font-family: Inter;
     font-size: 48px;
   }
   p{
-    color: white;
+    color: black;
     font-family: Inter;
     font-size: 16px;
   }
@@ -88,12 +99,12 @@
 
 .subscription-container {
   h1 {
-    color: white;
+    color: black;
     font-family: Inter;
     font-size: 40px;
   }
   p{
-    color: white;
+    color: black;
     font-family: Inter;
     font-size: 16px;
   }
@@ -102,7 +113,8 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
-  background-color: #151515;
+  padding-top: 40px;
+  background-color: #ffffff;
   padding-left: 120px;
   padding-right: 220px;
 }
@@ -111,7 +123,7 @@
   padding: 80px;
   margin-left: 200px;
   border-radius: 20px;
-  background-color: #383F3F;
+  background-color: #ffffff;
   width: 350px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
@@ -127,13 +139,13 @@
 
 .title {
   font-size: 24px;
-  color: #fff;
+  color: #000;
   margin-bottom: 15px;
 }
 
 .price {
   font-size: 32px;
-  color: #fff;
+  color: #000;
   margin-bottom: 20px;
 }
 
@@ -160,8 +172,8 @@ button:hover {
 }
 
 .footer {
-  background-color: #151515;
-  color: #939395;
+  background-color: #ffffff;
+  color: #000000;
   font-family: Inter;
   font-size: 15px;
   text-align: center;
@@ -169,12 +181,12 @@ button:hover {
 
 
 nz-divider{
-  background-color:#939395;
+  background-color:#000000  ;
 }
 
 
 .subscription {
-  background-color:#151515;
+  background-color:#ECEEF1;
   color: white;
   padding: 20px;
   margin: auto;

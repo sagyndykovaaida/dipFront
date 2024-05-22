@@ -10,7 +10,6 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import {CurrencyPipe, DecimalPipe, formatDate, NgClass, NgForOf, NgStyle, PercentPipe} from "@angular/common";
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import {NzRadioComponent, NzRadioGroupComponent} from "ng-zorro-antd/radio";
-// import {FormsModule} from "@angular/forms";
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import * as PlotlyJS from 'plotly.js/dist/plotly.js';
 import { PlotlyModule } from 'angular-plotly.js';
@@ -20,7 +19,6 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import {NzFormControlComponent, NzFormDirective, NzFormItemComponent, NzFormLabelComponent} from "ng-zorro-antd/form";
 import {MatIcon} from "@angular/material/icon";
 import { NzModalModule } from 'ng-zorro-antd/modal';
-import Plotly from 'plotly.js/dist/plotly.js';
 PlotlyModule.plotlyjs = PlotlyJS;
 interface StockData {
   Date: string;
