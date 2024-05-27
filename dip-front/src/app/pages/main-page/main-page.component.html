@@ -1,11 +1,11 @@
 <nz-layout>
   <nz-header>
     <div class="logo">
-      <img src="assets/main_logo_B.png" style="width: 40px;  "/>
+      <img src="assets/main_logo_B.png" style="width: 40px;" />
       <span>Agile Market Minds</span>
     </div>
     <ul nz-menu nzTheme="light" nzMode="horizontal" class="header-menu">
-      <li nz-menu-item >
+      <li nz-menu-item>
         <nz-input-group [nzSuffix]="suffixIconSearch">
           <input type="text" nz-input [(ngModel)]="selectedTicker" placeholder="Enter Ticker" />
         </nz-input-group>
@@ -13,27 +13,62 @@
           <span nz-icon nzType="search"></span>
         </ng-template>
       </li>
+      <li nz-menu-item class="date-time" style="margin-left: 650px; color:#45464f">
+        {{ currentDateTime }}
+      </li>
+      <li nz-menu-item>
+        <button mat-button class="logout-button" (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          Logout
+        </button>
+      </li>
     </ul>
   </nz-header>
   <nz-layout>
-    <nz-sider  nzTheme="light">
+    <nz-sider nzTheme="light">
       <ul nz-menu nzMode="inline" class="sider-menu">
-        <li  nz-menu-item >
+        <li nz-menu-item  nzSelected>
           <span style="padding-left: 25px">Диаграмма</span>
         </li>
-        <li  nz-menu-item >
+        <li nz-menu-item routerLink="/analyze" routerLinkActive="nzSelected">
           <span style="padding-left: 25px">Анализ</span>
+        </li>
+        <li nz-menu-item>
+          <span style="padding-left: 25px">Справочник</span>
         </li>
       </ul>
     </nz-sider>
     <nz-layout class="inner-layout">
-      <div nz-row class="second-content">
-        <div nz-col nzSpan="15" class="analyze-content">
-          <button nz-button nzType="default" nzShape="round" (click)="loadData(selectedTicker, '1D')">1 день</button>
+      <div nz-row nzGutter="16" class="top-section">
+        <nz-carousel nzDotPosition="top"
+                     nzAutoPlay
+                     nzAutoPlaySpeed="3000"
+                     nzEffect="scrollx"
+                     class="top-section-carousel slow-transition-carousel">
+          <div nz-carousel-content *ngFor="let group of stocks">
+            <div nz-row nzGutter="16">
+              <div nz-col [nzSpan]="4" *ngFor="let stock of group">
+                <div class="stock-card">
+                  <img [src]="stock.logo" [alt]="stock.name" class="logo-carousel">
+                  <div class="stock-info">
+                    <div class="stock-name">{{ stock.name }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nz-carousel>
+      </div>
+
+      <div nz-row>
+        <div nz-col nzSpan="14" class="analyze-content">
+          <div >
+            <button nz-button nzType="default" nzShape="round" (click)="loadData(selectedTicker, '1D')">1 день</button>
           <button nz-button nzType="primary" nzShape="round" (click)="loadData(selectedTicker, '1W')">1 неделя</button>
-          <button nz-button nzType="default" nzShape="round" (click)="loadData(selectedTicker, '1M')">1 месяц</button>
-          <button nz-button nzType="default" nzShape="round" (click)="loadData(selectedTicker, '1Y')">1 год</button>
-            <mat-icon style="margin-left: 270px" (click)="showModal()">settings</mat-icon>
+            <button nz-button nzType="default" nzShape="round" (click)="loadData(selectedTicker, '1M')">1 месяц</button>
+            <button nz-button nzType="default" nzShape="round" (click)="loadData(selectedTicker, '1Y')">1 год</button>
+            <mat-icon style="margin-left: 200px" (click)="showModal()">settings</mat-icon>
+          </div>
           <nz-modal
             [(nzVisible)]="isVisible"
             (nzOnCancel)="handleCancel()"
@@ -41,29 +76,29 @@
           >
             <div *nzModalFooter>
               <button nz-button nzType="default" (click)="handleCancel()">Отмена</button>
-              <button nz-button nzType="primary" (click)="loadStockData()"   [nzLoading]="isOkLoading">Загрузить данные</button>
+              <button nz-button nzType="primary" (click)="loadStockData()" [nzLoading]="isOkLoading">Загрузить данные</button>
             </div>
             <ng-container *nzModalContent>
               <div class="stock-input">
-
                 <div class="items">
-                  <input nz-input [(ngModel)]="ticker" placeholder="Введите тикер">
+                  <input nz-input [(ngModel)]="ticker" placeholder="Введите тикер" />
                 </div>
                 <div class="items">
-                  <nz-date-picker [(ngModel)]="startDate"   (ngModelChange)="startDate = formatDate($event, 'yyyy-MM-dd', 'en-US')"
-                                  nzPlaceHolder="с" nzFormat="dd.MM.yyyy"></nz-date-picker>
+                  <nz-date-picker [(ngModel)]="startDate" (ngModelChange)="startDate = formatDate($event, 'yyyy-MM-dd', 'en-US')" nzPlaceHolder="с" nzFormat="dd.MM.yyyy"></nz-date-picker>
                 </div>
                 <div class="items">
-                  <nz-date-picker [(ngModel)]="endDate"  nzPlaceHolder="до" nzFormat="dd.MM.yyyy" ></nz-date-picker>
-                </div>
-                <div>
-<!--                  <button (click)="loadStockData()">Load Data</button>-->
+                  <nz-date-picker [(ngModel)]="endDate" (ngModelChange)="endDate = formatDate($event, 'yyyy-MM-dd', 'en-US')" nzPlaceHolder="до" nzFormat="dd.MM.yyyy"></nz-date-picker>
                 </div>
               </div>
             </ng-container>
           </nz-modal>
           <div>
             <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+          </div>
+        </div>
+        <div nz-col nzSpan="6" nzOffset="4" class="analyze-content">
+          <h3 style="padding-left: 20px">Список </h3>
+          <div class="stock-list-container">
           </div>
         </div>
       </div>

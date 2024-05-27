@@ -24,7 +24,7 @@ import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { MatIconButton } from '@angular/material/button';
 import { NgForOf, NgClass, PercentPipe, CurrencyPipe } from '@angular/common';
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
-import {Stock, stocks} from "../companies";
+
 PlotlyModule.plotlyjs = PlotlyJS;
 
 interface StockData {
@@ -84,19 +84,11 @@ interface StockData {
     RouterLink,
     RouterLinkActive
   ],
-  templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  templateUrl: './analysis.component.html',
+  styleUrls: ['../main-page/main-page.component.scss']
 })
-export class MainPageComponent implements OnInit {
-  stocks: Stock[][] = this.groupStocks(stocks);
+export class AnalysisComponent implements OnInit {
 
-  private groupStocks(stocks: Stock[]): Stock[][] {
-    const groupedStocks: Stock[][] = [];
-    for (let i = 0; i < stocks.length; i += 6) {
-      groupedStocks.push(stocks.slice(i, i + 6));
-    }
-    return groupedStocks;
-  }
   isVisible = false;
   isOkLoading = false;
 
@@ -136,7 +128,6 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.updateDateTime();
     setInterval(() => this.updateDateTime(), 1000); // Update every minute
-
   }
 
   loadStockData(): void {
@@ -236,7 +227,6 @@ export class MainPageComponent implements OnInit {
   }
 
   currentDateTime: string = '';
-
   updateDateTime(): void {
     const now = new Date();
     const daysOfWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];

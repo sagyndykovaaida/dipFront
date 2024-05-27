@@ -1,0 +1,45 @@
+<nz-layout>
+  <nz-header>
+    <div class="logo">
+      <img src="assets/main_logo_B.png" style="width: 40px;" />
+      <span>Agile Market Minds</span>
+    </div>
+    <ul nz-menu nzTheme="light" nzMode="horizontal" class="header-menu">
+      <li nz-menu-item>
+        <nz-input-group [nzSuffix]="suffixIconSearch">
+          <input type="text" nz-input [(ngModel)]="selectedTicker" placeholder="Enter Ticker" />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+          <span nz-icon nzType="search"></span>
+        </ng-template>
+      </li>
+      <li nz-menu-item class="date-time" style="margin-left: 650px; color:#45464f">
+        {{ currentDateTime }}
+      </li>
+      <li nz-menu-item>
+        <button mat-button class="logout-button" (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          Logout
+        </button>
+      </li>
+    </ul>
+  </nz-header>
+  <nz-layout>
+    <nz-sider nzTheme="light">
+      <ul nz-menu nzMode="inline" class="sider-menu">
+        <li nz-menu-item  routerLink="/main" routerLinkActive="nzSelected">
+          <span style="padding-left: 25px">Диаграмма</span>
+        </li>
+        <li nz-menu-item nzSelected>
+          <span style="padding-left: 25px">Анализ</span>
+        </li>
+        <li nz-menu-item>
+          <span style="padding-left: 25px">Справочник</span>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout class="inner-layout">
+
+    </nz-layout>
+  </nz-layout>
+</nz-layout>
