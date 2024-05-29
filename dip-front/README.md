@@ -1,5 +1,22 @@
 # Agile Market Minds
 
+Бұл жоба Angular CLI 17.2.3 нұсқасымен жасалған.
+
+## Әзірлеу сервері
+Dev сервері үшін `ng serve` іске қосыңыз. Одан кейін келесіге өтіңіз http://localhost:4200/. Бастапқы файлдардың кез келгенін өзгертсеңіз, қолданба автоматты түрде қайта жүктеледі.
+
+## Кодтық тіректер
+Жаңа компонентті жасау үшін `ng generate component component-name` командасын қолдану.
+
+## Құрастыру
+Жобаны құрастыруды іске асыру үшін `ng build` командасын орындау. 
+
+## unit test жүргізу
+Карма unit тесті үшін `ng test` командасын орындау.
+
+## Қосымша көмек
+Angular CLI бойынша қосымша көмек алу үшін ng анықтамасын пайдаланыңыз немесе Angular CLI Шолу Сілтемесі бетін қараңыз.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.3.
 
 ## Development server
