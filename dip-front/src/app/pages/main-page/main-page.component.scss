@@ -81,11 +81,20 @@ nz-layout{
   margin-bottom: 20px;
 }
 
+.stockinput {
+  flex-direction: row;
+  margin-bottom: 20px;
+}
 
 .items{
   padding-top: 20px;
   padding-left: 70px;
   width: 350px;
+}
+
+.item{
+  margin-right: 30px;
+  width: 300px;
 }
 
 nz-date-picker{
@@ -94,19 +103,6 @@ nz-date-picker{
 button {
   align-self: center;
 }
-
-
-//.stock-card {
-//  display: flex;
-//  align-items: center;
-//  padding: 10px;
-//  border: 1px solid #ddd;
-//  border-radius: 10px;
-//  background-color: #fff;
-//  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-//  flex: 1 1 calc(25% - 20px);
-//  margin-bottom: 20px;
-//}
 
 .logo-list {
   width: 40px;
@@ -117,21 +113,6 @@ button {
 .stock-info {
   display: flex;
   flex-direction: column;
-}
-
-.stock-name {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.stock-price {
-  font-size: 14px;
-  color: green;
-}
-
-.stock-change {
-  font-size: 12px;
-  color: red;
 }
 
 .analyze-content {
@@ -166,15 +147,12 @@ button {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-
-
 .top-section {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-
 
 .stock-card {
   display: flex;
@@ -191,32 +169,36 @@ button {
   width: 100%;
   overflow: hidden;
 }
-.slow-transition-carousel .ant-carousel .slick-slide {
-  transition: transform 1000s ease; /* Плавный переход */
-}
 .stock-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 5px; /* уменьшить padding */
+  padding: 5px;
   text-align: center;
 }
 
 .logo-carousel {
-  width: 40px;  /* уменьшить размер логотипа */
-  height: 40px; /* уменьшить размер логотипа */
+  width: 40px;
+  height: 40px;
   object-fit: contain;
 }
 
 .stock-info {
-  margin-top: 5px; /* уменьшить отступ */
+  margin-top: 5px;
 }
 
 .stock-name {
-  font-size: 10px; /* уменьшить размер шрифта */
+  font-size: 10px;
   font-weight: bold;
 }
 
+.plot-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 
-
-
+.plot-container plotly-plot {
+  width: 48%;
+  height: 400px;
+}

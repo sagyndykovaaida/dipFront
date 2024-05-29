@@ -39,7 +39,22 @@
       </ul>
     </nz-sider>
     <nz-layout class="inner-layout">
-
+      <div class="stockinput">
+        <input  class="item" nz-input [(ngModel)]="ticker1" placeholder="Введите тикер" />
+        <nz-date-picker class="item" [(ngModel)]="startDate1" (ngModelChange)="startDate1 = formatDate($event, 'yyyy-MM-dd', 'en-US')" nzPlaceHolder="с" nzFormat="dd.MM.yyyy"></nz-date-picker>
+        <nz-date-picker class="item" [(ngModel)]="endDate1" (ngModelChange)="endDate1 = formatDate($event, 'yyyy-MM-dd', 'en-US')" nzPlaceHolder="до" nzFormat="dd.MM.yyyy"></nz-date-picker>
+        <button nz-button (click)="loadStockData1()">Load Data 1</button>
+      </div>
+      <div class="stockinput">
+        <input  class="item" nz-input [(ngModel)]="ticker2" placeholder="Введите тикер" />
+        <nz-date-picker class="item" [(ngModel)]="startDate2" (ngModelChange)="startDate2 = formatDate($event, 'yyyy-MM-dd', 'en-US')" nzPlaceHolder="с" nzFormat="dd.MM.yyyy"></nz-date-picker>
+        <nz-date-picker class="item" [(ngModel)]="endDate2" (ngModelChange)="endDate2 = formatDate($event, 'yyyy-MM-dd', 'en-US')" nzPlaceHolder="до" nzFormat="dd.MM.yyyy"></nz-date-picker>
+        <button nz-button (click)="loadStockData2()">Load Data 2</button>
+      </div>
+      <div class="plot-container">
+        <plotly-plot [data]="graph1.data" [layout]="graph1.layout"></plotly-plot>
+        <plotly-plot [data]="graph2.data" [layout]="graph2.layout"></plotly-plot>
+      </div>
     </nz-layout>
   </nz-layout>
 </nz-layout>

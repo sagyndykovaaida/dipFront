@@ -109,7 +109,6 @@ export class MainPageComponent implements OnInit {
   }
 
   date = null;
-  timeRange: string = '1D';
   ticker: string = '';
   startDate: string = '';
   endDate: string = '';
@@ -136,7 +135,6 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.updateDateTime();
     setInterval(() => this.updateDateTime(), 1000); // Update every minute
-
   }
 
   loadStockData(): void {
@@ -210,7 +208,6 @@ export class MainPageComponent implements OnInit {
       console.error('Error loading stock data:', error);
     });
   }
-
   calculateTrendLine(data: StockData[]): [number, number] {
     const n = data.length;
     const sumX = data.reduce((acc, val, idx) => acc + idx, 0);
@@ -227,16 +224,12 @@ export class MainPageComponent implements OnInit {
     return [startY, endY];
   }
 
-
   protected readonly formatDate = formatDate;
-
 
   logout(): void {
     console.log("logout");
   }
-
   currentDateTime: string = '';
-
   updateDateTime(): void {
     const now = new Date();
     const daysOfWeek = ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
@@ -250,7 +243,6 @@ export class MainPageComponent implements OnInit {
     const seconds = now.getSeconds().toString().padStart(2, '0');
     this.currentDateTime = `${day}, ${date} ${month} ${year} ${hours}:${minutes}:${seconds}`;
   }
-
 
   loadData(ticker: string, timeframe: string): void {
     const timeframeMap: { [key: string]: string } = {
@@ -275,6 +267,5 @@ export class MainPageComponent implements OnInit {
       error: (error: any) => console.error('Error loading stock data:', error)
     });
   }
-
 
 }
